@@ -9,11 +9,11 @@ FPS = 60
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Тест")
-background = pygame.image.load("back_menu600.jpg")
-background_s = pygame.image.load("back_settings600.jpg")
+background = pygame.image.load("data/back_menu600.jpg")
+background_s = pygame.image.load("data/back_settings600.jpg")
 clock = pygame.time.Clock()
 
-cur = pygame.image.load("cursor.png")
+cur = pygame.image.load("data/cursor.png")
 pygame.mouse.set_visible(False)
 
 
@@ -28,12 +28,12 @@ def draw_cur():
 
 
 def main_menu():
-    button_1 = ImageButton(WIDTH // 2 - (252 // 2), 250, 252, 74, "Начать", "Button_1-1.png", "Button_1.png",
-                           "click.mp3")
-    button_2 = ImageButton(WIDTH // 2 - (252 // 2), 350, 252, 74, "Настройки", "Button_1-1.png", "Button_1.png",
-                           "click.mp3")
-    button_3 = ImageButton(WIDTH // 2 - (252 // 2), 450, 252, 74, "Выход", "Button_1-1.png", "Button_1.png",
-                           "click.mp3")
+    button_1 = ImageButton(WIDTH // 2 - (252 // 2), 250, 252, 74, "Начать", "data/Button_1-1.png", "data/Button_1.png",
+                           "data/click.mp3")
+    button_2 = ImageButton(WIDTH // 2 - (252 // 2), 350, 252, 74, "Настройки", "data/Button_1-1.png",
+                           "data/Button_1.png", "data/click.mp3")
+    button_3 = ImageButton(WIDTH // 2 - (252 // 2), 450, 252, 74, "Выход", "data/Button_1-1.png", "data/Button_1.png",
+                           "data/click.mp3")
 
     running = True
     while running:
@@ -41,7 +41,7 @@ def main_menu():
         screen.blit(background, (0, 0))
 
         font = pygame.font.Font(None, 72)
-        text_surface = font.render("GAME", True, (0, 0, 0))
+        text_surface = font.render("Little Hero", True, (0, 0, 0))
         text_rect = text_surface.get_rect(center=(WIDTH // 2, 200))
         screen.blit(text_surface, text_rect)
 
@@ -77,10 +77,12 @@ def main_menu():
 
 
 def settings_menu():
-    audio = ImageButton(WIDTH // 2 - (252 // 2), 250, 252, 74, "Аудио", "Button_1-1.png", "Button_1.png", "click.mp3")
-    video = ImageButton(WIDTH // 2 - (252 // 2), 350, 252, 74, "Видео", "Button_1-1.png", "Button_1.png",
-                        "click.mp3")
-    back = ImageButton(WIDTH // 2 - (252 // 2), 450, 252, 74, "Назад", "Button_1-1.png", "Button_1.png", "click.mp3")
+    audio = ImageButton(WIDTH // 2 - (252 // 2), 250, 252, 74, "Аудио", "data/Button_1-1.png", "data/Button_1.png",
+                        "data/click.mp3")
+    video = ImageButton(WIDTH // 2 - (252 // 2), 350, 252, 74, "Видео", "data/Button_1-1.png", "data/Button_1.png",
+                        "data/click.mp3")
+    back = ImageButton(WIDTH // 2 - (252 // 2), 450, 252, 74, "Назад", "data/Button_1-1.png", "data/Button_1.png",
+                       "data/click.mp3")
 
     running = True
     while running:
@@ -126,13 +128,14 @@ def settings_menu():
 
 def video_settings():
     global WIDTH, HEIGHT, screen
-    video_1 = ImageButton(WIDTH // 2 - (252 // 2), 180, 252, 74, "600x550", "Button_1-1.png", "Button_1.png",
-                          "click.mp3")
-    video_2 = ImageButton(WIDTH // 2 - (252 // 2), 280, 252, 74, "1024x650", "Button_1-1.png", "Button_1.png",
-                          "click.mp3")
-    video_3 = ImageButton(WIDTH // 2 - (252 // 2), 380, 252, 74, "1366x768", "Button_1-1.png", "Button_1.png",
-                          "click.mp3")
-    back = ImageButton(WIDTH // 2 - (252 // 2), 480, 252, 74, "Назад", "Button_1-1.png", "Button_1.png", "click.mp3")
+    video_1 = ImageButton(WIDTH // 2 - (252 // 2), 180, 252, 74, "600x550", "data/Button_1-1.png", "data/Button_1.png",
+                          "data/click.mp3")
+    video_2 = ImageButton(WIDTH // 2 - (252 // 2), 280, 252, 74, "1024x650", "data/Button_1-1.png", "data/Button_1.png",
+                          "data/click.mp3")
+    video_3 = ImageButton(WIDTH // 2 - (252 // 2), 380, 252, 74, "1366x768", "data/Button_1-1.png", "data/Button_1.png",
+                          "data/click.mp3")
+    back = ImageButton(WIDTH // 2 - (252 // 2), 480, 252, 74, "Назад", "data/Button_1-1.png", "data/Button_1.png",
+                       "data/click.mp3")
 
     running = True
     while running:
@@ -186,7 +189,8 @@ def video_settings():
 
 
 def new_game():
-    back_button = ImageButton(WIDTH // 2 - (252 // 2), 250, 252, 74, "Назад", "Button_1-1.png", "Button_1.png", "click.mp3")
+    back_button = ImageButton(WIDTH // 2 - (252 // 2), 250, 252, 74, "Назад", "data/Button_1-1.png",
+                              "data/Button_1.png", "data/click.mp3")
 
     running = True
     while running:
@@ -251,8 +255,8 @@ def change_mode(w, h, fullscreen=0):
 
     WIDTH, HEIGHT = w, h
     screen = pygame.display.set_mode((WIDTH, HEIGHT), fullscreen)
-    background_s = pygame.image.load(f"back_settings{WIDTH}.jpg")
-    background = pygame.image.load(f"back_menu{WIDTH}.jpg")
+    background_s = pygame.image.load(f"data/back_settings{WIDTH}.jpg")
+    background = pygame.image.load(f"data/back_menu{WIDTH}.jpg")
 
 
 if __name__ == "__main__":
