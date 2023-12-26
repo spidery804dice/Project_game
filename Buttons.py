@@ -21,6 +21,10 @@ class ImageButton:
             self.sound = pygame.mixer.Sound(sound_path)
         self.is_hovered = False
 
+    def set_pos(self, x, y=None):
+        self.x = x
+        self.rect = self.image.get_rect(topleft=(self.x, self.y))
+
     def draw(self, screen):
         if self.is_hovered:
             current_image = self.hover_image

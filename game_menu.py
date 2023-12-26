@@ -9,7 +9,8 @@ FPS = 60
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Тест")
-background = pygame.image.load("back600.jpg")
+background = pygame.image.load("back_menu600.jpg")
+background_s = pygame.image.load("back_settings600.jpg")
 clock = pygame.time.Clock()
 
 cur = pygame.image.load("cursor.png")
@@ -27,10 +28,12 @@ def draw_cur():
 
 
 def main_menu():
-    button_1 = ImageButton(10, 250, 252, 74, "Начать", "Button_1-1.png", "Button_1.png", "click.mp3")
-    button_2 = ImageButton(10, 350, 252, 74, "Настройки", "Button_1-1.png", "Button_1.png",
+    button_1 = ImageButton(WIDTH // 2 - (252 // 2), 250, 252, 74, "Начать", "Button_1-1.png", "Button_1.png",
                            "click.mp3")
-    button_3 = ImageButton(10, 450, 252, 74, "Выход", "Button_1-1.png", "Button_1.png", "click.mp3")
+    button_2 = ImageButton(WIDTH // 2 - (252 // 2), 350, 252, 74, "Настройки", "Button_1-1.png", "Button_1.png",
+                           "click.mp3")
+    button_3 = ImageButton(WIDTH // 2 - (252 // 2), 450, 252, 74, "Выход", "Button_1-1.png", "Button_1.png",
+                           "click.mp3")
 
     running = True
     while running:
@@ -39,7 +42,7 @@ def main_menu():
 
         font = pygame.font.Font(None, 72)
         text_surface = font.render("GAME", True, (0, 0, 0))
-        text_rect = text_surface.get_rect(center=(130, 200))
+        text_rect = text_surface.get_rect(center=(WIDTH // 2, 200))
         screen.blit(text_surface, text_rect)
 
         for event in pygame.event.get():
@@ -54,6 +57,8 @@ def main_menu():
             if event.type == pygame.USEREVENT and event.button == button_2:
                 fade()
                 settings_menu()
+                for btn in [button_1, button_2, button_3]:
+                    btn.set_pos(WIDTH // 2 - (252 // 2))
 
             if event.type == pygame.USEREVENT and event.button == button_3:
                 running = False
@@ -72,19 +77,19 @@ def main_menu():
 
 
 def settings_menu():
-    audio = ImageButton(10, 250, 252, 74, "Аудио", "Button_1-1.png", "Button_1.png", "click.mp3")
-    video = ImageButton(10, 350, 252, 74, "Видео", "Button_1-1.png", "Button_1.png",
-                           "click.mp3")
-    back = ImageButton(10, 450, 252, 74, "Назад", "Button_1-1.png", "Button_1.png", "click.mp3")
+    audio = ImageButton(WIDTH // 2 - (252 // 2), 250, 252, 74, "Аудио", "Button_1-1.png", "Button_1.png", "click.mp3")
+    video = ImageButton(WIDTH // 2 - (252 // 2), 350, 252, 74, "Видео", "Button_1-1.png", "Button_1.png",
+                        "click.mp3")
+    back = ImageButton(WIDTH // 2 - (252 // 2), 450, 252, 74, "Назад", "Button_1-1.png", "Button_1.png", "click.mp3")
 
     running = True
     while running:
         screen.fill((0, 0, 0))
-        screen.blit(background, (0, 0))
+        screen.blit(background_s, (0, 0))
 
         font = pygame.font.Font(None, 72)
         text_surface = font.render("SETTINGS", True, (0, 0, 0))
-        text_rect = text_surface.get_rect(center=(130, 200))
+        text_rect = text_surface.get_rect(center=(WIDTH // 2, 200))
         screen.blit(text_surface, text_rect)
 
         for event in pygame.event.get():
@@ -104,6 +109,8 @@ def settings_menu():
             if event.type == pygame.USEREVENT and event.button == video:
                 fade()
                 video_settings()
+                for btn in [audio, video, back]:
+                    btn.set_pos(WIDTH // 2 - (252 // 2))
 
             for btn in [audio, video, back]:
                 btn.handle_event(event)
@@ -119,19 +126,22 @@ def settings_menu():
 
 def video_settings():
     global WIDTH, HEIGHT, screen
-    video_1 = ImageButton(10, 180, 252, 74, "600x550", "Button_1-1.png", "Button_1.png", "click.mp3")
-    video_2 = ImageButton(10, 280, 252, 74, "1280x800", "Button_1-1.png", "Button_1.png", "click.mp3")
-    video_3 = ImageButton(10, 380, 252, 74, "Full HD", "Button_1-1.png", "Button_1.png", "click.mp3")
-    back = ImageButton(10, 480, 252, 74, "Назад", "Button_1-1.png", "Button_1.png", "click.mp3")
+    video_1 = ImageButton(WIDTH // 2 - (252 // 2), 180, 252, 74, "600x550", "Button_1-1.png", "Button_1.png",
+                          "click.mp3")
+    video_2 = ImageButton(WIDTH // 2 - (252 // 2), 280, 252, 74, "1024x650", "Button_1-1.png", "Button_1.png",
+                          "click.mp3")
+    video_3 = ImageButton(WIDTH // 2 - (252 // 2), 380, 252, 74, "1366x768", "Button_1-1.png", "Button_1.png",
+                          "click.mp3")
+    back = ImageButton(WIDTH // 2 - (252 // 2), 480, 252, 74, "Назад", "Button_1-1.png", "Button_1.png", "click.mp3")
 
     running = True
     while running:
         screen.fill((0, 0, 0))
-        screen.blit(background, (0, 0))
+        screen.blit(background_s, (0, 0))
 
         font = pygame.font.Font(None, 72)
         text_surface = font.render("SETTINGS", True, (0, 0, 0))
-        text_rect = text_surface.get_rect(center=(130, 130))
+        text_rect = text_surface.get_rect(center=(WIDTH // 2, 130))
         screen.blit(text_surface, text_rect)
 
         for event in pygame.event.get():
@@ -150,15 +160,18 @@ def video_settings():
 
             if event.type == pygame.USEREVENT and event.button == video_1:
                 change_mode(600, 550)
-                fade()
+                for btn in [video_1, video_2, video_3, back]:
+                    btn.set_pos(WIDTH // 2 - (252 // 2))
 
             if event.type == pygame.USEREVENT and event.button == video_2:
-                change_mode(1100, 602)
-                fade()
+                change_mode(1024, 650)
+                for btn in [video_1, video_2, video_3, back]:
+                    btn.set_pos(WIDTH // 2 - (252 // 2))
 
             if event.type == pygame.USEREVENT and event.button == video_3:
-                change_mode(1366, 767, pygame.FULLSCREEN)
-                fade()
+                change_mode(1366, 768, pygame.FULLSCREEN)
+                for btn in [video_1, video_2, video_3, back]:
+                    btn.set_pos(WIDTH // 2 - (252 // 2))
 
             for btn in [video_1, video_2, video_3, back]:
                 btn.handle_event(event)
@@ -173,7 +186,7 @@ def video_settings():
 
 
 def new_game():
-    back_button = ImageButton(180, 250, 252, 74, "Назад", "Button_1-1.png", "Button_1.png", "click.mp3")
+    back_button = ImageButton(WIDTH // 2 - (252 // 2), 250, 252, 74, "Назад", "Button_1-1.png", "Button_1.png", "click.mp3")
 
     running = True
     while running:
@@ -182,7 +195,7 @@ def new_game():
 
         font = pygame.font.Font(None, 72)
         text_surface = font.render("New game", True, (0, 0, 0))
-        text_rect = text_surface.get_rect(center=(300, 200))
+        text_rect = text_surface.get_rect(center=(WIDTH // 2, 200))
         screen.blit(text_surface, text_rect)
 
         for event in pygame.event.get():
@@ -198,6 +211,7 @@ def new_game():
             if event.type == pygame.USEREVENT and event.button == back_button:
                 fade()
                 running = False
+                back_button.set_pos(WIDTH // 2 - (252 // 2))
 
             back_button.handle_event(event)
 
@@ -233,11 +247,12 @@ def fade():
 
 
 def change_mode(w, h, fullscreen=0):
-    global WIDTH, HEIGHT, screen, background
+    global WIDTH, HEIGHT, screen, background_s, background
 
     WIDTH, HEIGHT = w, h
     screen = pygame.display.set_mode((WIDTH, HEIGHT), fullscreen)
-    background = pygame.image.load(f"back{WIDTH}.jpg")
+    background_s = pygame.image.load(f"back_settings{WIDTH}.jpg")
+    background = pygame.image.load(f"back_menu{WIDTH}.jpg")
 
 
 if __name__ == "__main__":
