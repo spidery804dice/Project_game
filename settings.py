@@ -1,6 +1,6 @@
 cut_scene_presets = [
-    [('img/grass.jpg', 10.0), ('img/lava.jpg', 10.0)],
-    [('img/lava.jpg', 1.6), ('img/grass.jpg', 1.4), ('img/lava.jpg', 1.5)]
+    [('img/cut-scene1.jpg', 10.0), ('img/cut-scene2.jpg', 10.0)],
+    [('img/cut-scene3.jpg', 7.0)]
 ]
 fps = 60
 

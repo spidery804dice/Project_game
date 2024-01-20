@@ -21,10 +21,13 @@ def game(WIDTH, HEIGHT, fullscreen=0):
 
     virtual_surface = pygame.Surface((1000, 1000))
 
+    death_count = 0
+    f1 = pygame.font.Font(None, 36)
+
     tile_size = 50
     game_over = 0
-    level = 1
-    max_levels = 5
+    level = 4
+    max_levels = 4
     world_data = None
     start = True
 
@@ -237,6 +240,9 @@ def game(WIDTH, HEIGHT, fullscreen=0):
         def draw(self):
             for tile in self.tile_list:
                 virtual_surface.blit(tile[0], tile[1])
+            text = f1.render(f'{death_count} deaths', True,
+                              (255, 255, 255))
+            virtual_surface.blit(text, (0, 0))
 
     if level == 1:
         world_data = level_1
@@ -255,6 +261,7 @@ def game(WIDTH, HEIGHT, fullscreen=0):
 
     player = Player(100, 1000 - 130)
     initialCutScene = CutScene(number=0)
+    endCutScene = CutScene(number=1)
 
     enemy_group = pygame.sprite.Group()
     lava_group = pygame.sprite.Group()
@@ -282,6 +289,7 @@ def game(WIDTH, HEIGHT, fullscreen=0):
                 world_data = []
                 world = reset_level(level)
                 game_over = 0
+                death_count += 1
             elif event.type == pygame.USEREVENT and event.button == exit_button:
                 run = False
             elif event.type == pygame.VIDEORESIZE:
@@ -333,6 +341,9 @@ def game(WIDTH, HEIGHT, fullscreen=0):
                 world_data = []
                 world = reset_level(level)
                 game_over = 0
+            else:
+                endCutScene.play_cut_scene(screen, virtual_surface, clock)
+                run = False
 
         pygame.display.update()
     pygame.quit()
