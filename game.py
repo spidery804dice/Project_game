@@ -1,13 +1,14 @@
 import pygame
 from Buttons import ImageButton
-from Levels import level_1, level_2, level_3, level_4
+from Levels import *
+from CutScenes import CutScene
+from settings import fps
 
 
 def game(WIDTH, HEIGHT, fullscreen=0):
     pygame.init()
 
     clock = pygame.time.Clock()
-    fps = 60
 
     screen_width = WIDTH
     screen_height = HEIGHT
@@ -22,9 +23,10 @@ def game(WIDTH, HEIGHT, fullscreen=0):
 
     tile_size = 50
     game_over = 0
-    level = 4
-    max_levels = 4
+    level = 1
+    max_levels = 5
     world_data = None
+    start = True
 
     bg_img = pygame.image.load('img/sky.jpg')
     pygame.mixer.music.load("sound/game_sound.mp3")
@@ -46,6 +48,9 @@ def game(WIDTH, HEIGHT, fullscreen=0):
 
         elif level == 4:
             world_data = level_4
+
+        elif level == 5:
+            world_data = level_5
 
         elif level > max_levels:
             world_data = level_1
@@ -245,7 +250,11 @@ def game(WIDTH, HEIGHT, fullscreen=0):
     elif level == 4:
         world_data = level_4
 
+    elif level == 5:
+        world_data = level_5
+
     player = Player(100, 1000 - 130)
+    initialCutScene = CutScene(number=0)
 
     enemy_group = pygame.sprite.Group()
     lava_group = pygame.sprite.Group()
@@ -264,7 +273,6 @@ def game(WIDTH, HEIGHT, fullscreen=0):
     event = 0
 
     pygame.mixer.music.play(-1)
-
     run = True
     while run:
         for event in pygame.event.get():
@@ -282,6 +290,14 @@ def game(WIDTH, HEIGHT, fullscreen=0):
                 exit_button.set_pos(current_size[0] // 2 - (252 // 2), current_size[1] // 2)
 
         clock.tick(fps)
+        if clock.get_fps() == 0.0:
+            continue
+
+        if level == 1 and start:
+            initialCutScene.play_cut_scene(screen, virtual_surface, clock)
+            del initialCutScene
+            start = False
+
         virtual_surface.blit(bg_img, (0, 0))
 
         world.draw()
